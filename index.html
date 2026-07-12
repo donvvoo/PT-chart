@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="app-version" content="2026.07.06-3">
+<meta name="theme-color" content="#0e7d74">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="차팅생성기">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>도수치료 차팅 생성기</title>
+<style>
+:root{--ink:#16232e;--ink-soft:#5a6b78;--paper:#f6f8f9;--card:#ffffff;--line:#dde5ea;--accent:#0e7d74;--accent-soft:#e2f2f0;--danger:#b83232;--s-col:#1d6fb8;--o-col:#0e7d74;--a-col:#b0641d;--p-col:#7a4bb0;--radius:14px;--shadow:0 8px 24px rgba(22,35,46,.06)}
+[data-theme="dark"]{--ink:#edf5f4;--ink-soft:#a8bab7;--paper:#101817;--card:#162220;--line:#2d403c;--accent:#39b8ac;--accent-soft:#1e3a36;--danger:#ff7373;--shadow:none}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}html,body{background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif;font-size:16px;line-height:1.45}body{padding-bottom:126px}.wrap{max-width:760px;margin:0 auto;padding:16px}header{padding:18px 4px 14px;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}header h1{font-size:1.35rem;font-weight:900;letter-spacing:-.03em}header p{color:var(--ink-soft);font-size:.85rem;margin-top:3px}.top-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.mini-btn{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 11px;font-size:.82rem;font-weight:800;cursor:pointer}.mini-btn.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}.sec-tag{display:flex;align-items:center;gap:8px;font-weight:900;font-size:.95rem;margin-bottom:12px}.sec-tag .chip{display:inline-block;min-width:26px;text-align:center;padding:2px 7px;border-radius:7px;color:#fff;font-size:.8rem;font-weight:900}.chip.s{background:var(--s-col)}.chip.o{background:var(--o-col)}.chip.a{background:var(--a-col)}.chip.p{background:var(--p-col)}.chip.i{background:var(--ink)}label.fld{display:block;font-size:.8rem;font-weight:800;color:var(--ink-soft);margin:10px 0 5px}input[type=text],input[type=number],input[type=date],textarea,select{width:100%;padding:12px 13px;border:1.5px solid var(--line);border-radius:11px;font-size:1rem;font-family:inherit;background:#fcfdfe;color:#16232e}[data-theme="dark"] input,[data-theme="dark"] textarea,[data-theme="dark"] select{background:#101817;color:var(--ink)}input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}textarea{resize:vertical;min-height:56px}.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row3{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:10px}@media(max-width:520px){.row2,.row3{grid-template-columns:1fr}.top-actions{justify-content:flex-start}header{display:block}}.regions{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:8px}@media(max-width:560px){.regions{grid-template-columns:repeat(3,1fr)}}.region-btn{padding:10px 4px;border:1.5px solid var(--line);border-radius:11px;background:#fcfdfe;font-size:.82rem;font-weight:800;color:#5a6b78;text-align:center;cursor:pointer;transition:all .12s}[data-theme="dark"] .region-btn{background:#101817;color:var(--ink-soft)}.region-btn.on{background:var(--accent);border-color:var(--accent);color:#fff}.opt-grid{display:flex;flex-wrap:wrap;gap:8px}.opt{padding:9px 12px;border:1.5px solid var(--line);border-radius:999px;background:#fcfdfe;font-size:.85rem;font-weight:700;color:#16232e;cursor:pointer;user-select:none;transition:all .1s;line-height:1.25}[data-theme="dark"] .opt{background:#101817;color:var(--ink)}.opt small{display:block;font-size:.68rem;font-weight:600;color:var(--ink-soft)}.opt.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}.hint{color:var(--ink-soft);font-size:.82rem;padding:6px 2px}.subhead{font-size:.82rem;font-weight:900;color:var(--ink-soft);margin:16px 0 8px;letter-spacing:.02em}.region-sub{font-size:.76rem;font-weight:900;color:var(--accent);margin:10px 0 6px}.nrs-grid{display:flex;flex-wrap:wrap;gap:6px}.nrs{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--line);border-radius:10px;background:#fcfdfe;font-weight:800;font-size:.92rem;color:#16232e;cursor:pointer}[data-theme="dark"] .nrs{background:#101817;color:var(--ink)}.nrs.on{background:var(--s-col);border-color:var(--s-col);color:#fff}.nrs.on.p-side{background:var(--p-col);border-color:var(--p-col)}#preview{white-space:pre-wrap;background:#fbfcfd;border:1.5px dashed var(--line);border-radius:11px;padding:14px;font-size:.9rem;min-height:120px;color:#16232e}[data-theme="dark"] #preview{background:#101817;color:var(--ink)}#preview.empty{color:var(--ink-soft)}.bottombar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom));z-index:50}[data-theme="dark"] .bottombar{background:rgba(16,24,23,.96)}.bottombar .inner{max-width:760px;margin:0 auto;display:grid;grid-template-columns:auto 1fr 1fr;gap:10px}button.big{padding:15px;border:none;border-radius:12px;font-size:.98rem;font-weight:900;font-family:inherit;cursor:pointer}#copyBtn{background:var(--accent);color:#fff}#saveBtn{background:var(--ink);color:#fff}#resetBtn{background:#eef2f4;color:#5a6b78;padding:15px 18px}[data-theme="dark"] #resetBtn{background:#263532;color:var(--ink-soft)}.toast{position:fixed;left:50%;bottom:104px;transform:translateX(-50%) translateY(10px);background:var(--ink);color:var(--card);padding:10px 18px;border-radius:999px;font-size:.88rem;font-weight:800;opacity:0;pointer-events:none;transition:all .25s;z-index:99}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.list{display:grid;gap:8px}.item{border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:#fcfdfe;display:grid;gap:3px;cursor:pointer}[data-theme="dark"] .item{background:#101817}.item strong{font-size:.95rem}.item span{font-size:.8rem;color:var(--ink-soft)}.split-actions{display:flex;gap:8px;flex-wrap:wrap}.danger{color:var(--danger)!important;border-color:rgba(184,50,50,.35)!important}.phrasebar{display:flex;gap:8px;overflow-x:auto;padding-bottom:3px}.phrase{flex:0 0 auto;border:1.5px solid var(--line);border-radius:999px;padding:8px 11px;background:#fcfdfe;color:#16232e;font-size:.8rem;font-weight:800;cursor:pointer}[data-theme="dark"] .phrase{background:#101817;color:var(--ink)}.section-copy{margin-left:auto;display:flex;gap:6px}.section-copy button{border:1px solid var(--line);background:var(--card);color:var(--ink-soft);border-radius:8px;padding:5px 8px;font-size:.72rem;font-weight:900}.hidden{display:none!important}.notice{font-size:.82rem;color:var(--ink-soft);background:var(--accent-soft);border:1px solid var(--line);padding:10px;border-radius:11px;margin-top:8px}
+
+/* iOS Safari date input layout fix */
+input[type=date]{
+  -webkit-appearance:none;
+  appearance:none;
+  min-height:54px;
+  line-height:1.2;
+  text-align:left;
+  background:#fcfdfe;
+}
+input[type=date]::-webkit-date-and-time-value{
+  text-align:left;
+  min-height:1.2em;
+}
+input[type=date]::-webkit-calendar-picker-indicator{
+  opacity:.75;
+}
+
+
+.app-footer{
+  text-align:center;
+  color:var(--ink-soft);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.01em;
+  padding:8px 8px 22px;
+  margin-top:2px;
+}
+
+
+/* Saved chart selection management */
+.record-manage{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 10px}
+.item.manage{grid-template-columns:auto 1fr;align-items:center;column-gap:10px}
+.item.manage input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent)}
+.item.manage .item-body{display:grid;gap:3px;min-width:0}
+
+/* Copyright: always visible + desktop fixed-bar copy */
+.desktop-copyright{
+  display:none;
+  text-align:center;
+  color:var(--ink-soft);
+  font-size:.72rem;
+  font-weight:700;
+  padding-top:8px;
+}
+@media(min-width:761px){
+  body{padding-bottom:164px}
+  .desktop-copyright{display:block}
+  .bottombar .inner{max-width:760px}
+}
+
+
+/* Automatic update banner */
+.update-banner{
+  position:fixed;
+  left:50%;
+  bottom:calc(94px + env(safe-area-inset-bottom));
+  transform:translate(-50%,16px);
+  width:min(92vw,560px);
+  background:var(--ink);
+  color:#fff;
+  border-radius:14px;
+  padding:12px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  opacity:0;
+  pointer-events:none;
+  z-index:120;
+  box-shadow:0 10px 30px rgba(0,0,0,.20);
+  transition:opacity .22s ease,transform .22s ease;
+}
+.update-banner.show{
+  opacity:1;
+  pointer-events:auto;
+  transform:translate(-50%,0);
+}
+.update-banner strong{display:block;font-size:.92rem}
+.update-banner span{display:block;font-size:.76rem;opacity:.78;margin-top:2px}
+.update-banner button{
+  flex:0 0 auto;
+  border:0;
+  border-radius:10px;
+  padding:10px 12px;
+  background:var(--accent);
+  color:#fff;
+  font:inherit;
+  font-size:.82rem;
+  font-weight:800;
+  cursor:pointer;
+}
+.update-banner button:disabled{opacity:.65;cursor:default}
+@media(min-width:761px){
+  .update-banner{bottom:118px}
+}
+
+
+/* Previous chart search */
+.chart-search-wrap{
+  display:grid;
+  gap:8px;
+  margin:4px 0 10px;
+}
+.chart-search-row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+}
+.chart-search-row input{min-width:0}
+.search-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  color:var(--ink-soft);
+  font-size:.76rem;
+  min-height:20px;
+}
+.search-meta strong{color:var(--accent)}
+.search-empty{
+  padding:14px 4px;
+  color:var(--ink-soft);
+  font-size:.84rem;
+  text-align:center;
+}
+
+
+/* =========================================================
+   MOA Charting Clean Redesign v2026.07.05
+   기능/데이터 구조는 유지하고 시각 레이아웃만 개선
+   ========================================================= */
+:root{
+  --ink:#13222d;
+  --ink-soft:#60717e;
+  --paper:#f3f7f8;
+  --card:#ffffff;
+  --line:#d8e3e8;
+  --accent:#118b80;
+  --accent-deep:#0d756c;
+  --accent-soft:#e9f6f4;
+  --radius:20px;
+  --shadow:0 10px 30px rgba(24,55,67,.055);
+}
+html,body{background:linear-gradient(180deg,#f9fbfc 0,#f1f6f7 42%,#eef4f5 100%)}
+body{padding-bottom:128px}
+.wrap{max-width:920px;padding:20px 18px 28px}
+
+/* Header */
+.moa-header{
+  position:relative;
+  align-items:center;
+  padding:16px 18px;
+  margin-bottom:16px;
+  background:rgba(255,255,255,.92);
+  border:1px solid var(--line);
+  border-radius:22px;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);
+}
+.brand-block{display:flex;align-items:center;gap:12px;min-width:0}
+.brand-logo{
+  width:52px;height:52px;border-radius:14px;display:block;
+  box-shadow:0 4px 14px rgba(0,0,0,.12)
+}
+.moa-header h1{font-size:1.42rem;letter-spacing:-.04em}
+.moa-header p{font-size:.78rem;margin-top:2px}
+.top-actions{align-items:center}
+.mini-btn{
+  border-radius:12px;
+  padding:8px 11px;
+  background:#fff;
+  transition:transform .12s ease,border-color .12s ease,background .12s ease;
+}
+.mini-btn:active{transform:scale(.97)}
+.mini-btn.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-deep)}
+
+/* Cards */
+.card{
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:14px;
+  box-shadow:var(--shadow);
+  border-color:var(--line);
+}
+.utility-card{background:linear-gradient(180deg,#ffffff 0,#fbfdfd 100%)}
+.patient-card{border-top:3px solid var(--ink)}
+.soap-card{position:relative;overflow:hidden}
+.soap-card::before{
+  content:"";
+  position:absolute;left:0;top:0;bottom:0;width:4px;opacity:.95
+}
+.s-card::before{background:var(--s-col)}
+.o-card::before{background:var(--o-col)}
+.a-card::before{background:var(--a-col)}
+.p-card::before{background:var(--p-col)}
+.preview-card{border-top:3px solid var(--ink)}
+
+.sec-tag{
+  font-size:1.04rem;
+  margin-bottom:14px;
+  letter-spacing:-.02em;
+}
+.sec-tag .chip{
+  min-width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;
+  padding:0;border-radius:10px;font-size:.92rem
+}
+.section-copy button{
+  border-radius:10px;
+  padding:7px 10px;
+  background:#fff
+}
+
+/* Inputs */
+label.fld{font-size:.83rem;margin:12px 0 6px}
+input[type=text],input[type=number],input[type=date],textarea,select,input[type=search]{
+  border-radius:14px;
+  border:1.5px solid var(--line);
+  background:#fbfdfe;
+  padding:13px 14px;
+}
+input:focus,textarea:focus,select:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(17,139,128,.10)
+}
+textarea{min-height:70px}
+
+/* Patient area */
+.patient-card .regions{margin-top:10px}
+.regions{gap:9px}
+.region-btn{
+  min-height:62px;
+  border-radius:14px;
+  background:#fbfdfe;
+  font-size:.84rem;
+  line-height:1.3;
+  display:flex;align-items:center;justify-content:center;
+}
+.region-btn.on{
+  background:linear-gradient(135deg,var(--accent) 0,#18a296 100%);
+  border-color:var(--accent);
+  box-shadow:0 6px 16px rgba(17,139,128,.18)
+}
+
+/* Click-to-select assessment buttons */
+.opt-grid{gap:8px}
+.opt{
+  border-radius:12px;
+  padding:10px 13px;
+  background:#fbfdfe;
+  font-size:.84rem;
+}
+.opt.on{
+  background:linear-gradient(135deg,var(--accent) 0,#15998e 100%);
+  border-color:var(--accent);
+  color:#fff;
+  box-shadow:0 5px 14px rgba(17,139,128,.16)
+}
+.opt.on small{color:rgba(255,255,255,.78)}
+.phrasebar{gap:8px;padding:1px 0 5px}
+.phrase{
+  border-radius:999px;
+  background:#fff;
+  padding:9px 13px
+}
+.nrs{width:44px;height:44px;border-radius:12px}
+
+/* Search/history */
+.chart-search-row{grid-template-columns:minmax(0,1fr) auto}
+.item{
+  border-radius:14px;
+  padding:12px 13px;
+  background:#fbfdfe;
+}
+.item:hover{border-color:#b9d7d3}
+.record-manage{margin-bottom:10px}
+
+/* Preview */
+#preview{
+  border-radius:14px;
+  background:#fbfdfe;
+  padding:16px;
+  min-height:150px;
+  line-height:1.65
+}
+
+/* Bottom action bar */
+.bottombar{
+  padding:11px 16px calc(11px + env(safe-area-inset-bottom));
+  box-shadow:0 -8px 24px rgba(20,42,53,.06)
+}
+.bottombar .inner{max-width:920px;grid-template-columns:.72fr 1.35fr 1.35fr}
+button.big{border-radius:15px;padding:16px}
+#saveBtn{background:var(--ink)}
+#copyBtn{background:linear-gradient(135deg,var(--accent) 0,#15998e 100%)}
+
+/* Desktop: 더 넓고 정돈되지만 작성 순서는 그대로 */
+@media(min-width:761px){
+  .wrap{max-width:1100px;padding:24px}
+  .moa-header{padding:16px 20px}
+  .utility-card{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  .patient-card .row3{grid-template-columns:1.5fr .65fr 1fr}
+  .regions{grid-template-columns:repeat(5,1fr)}
+  .region-btn{min-height:58px}
+  .card{padding:20px 22px}
+  body{padding-bottom:156px}
+}
+
+/* Mobile: 기존처럼 위에서 아래로 즉시 선택 */
+@media(max-width:760px){
+  .wrap{padding:10px 10px 22px}
+  .moa-header{
+    display:flex;
+    align-items:center;
+    padding:12px 13px;
+    border-radius:18px;
+    margin-bottom:10px
+  }
+  .brand-logo{width:46px;height:46px;border-radius:12px}
+  .moa-header h1{font-size:1.2rem}
+  .moa-header p{font-size:.72rem}
+  .top-actions{
+    width:100%;
+    margin-top:10px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:6px
+  }
+  .top-actions .mini-btn{
+    padding:8px 4px;
+    font-size:.72rem;
+    white-space:nowrap
+  }
+  .card{padding:16px 14px;border-radius:18px;margin-bottom:11px}
+  .row2,.row3{grid-template-columns:1fr}
+  .regions{grid-template-columns:repeat(3,1fr);gap:8px}
+  .region-btn{min-height:58px;padding:8px 4px}
+  .sec-tag{font-size:1rem}
+  .opt{padding:9px 11px}
+  .chart-search-row{grid-template-columns:minmax(0,1fr) auto}
+  .chart-search-row .mini-btn{padding:8px 10px}
+  .bottombar .inner{grid-template-columns:.65fr 1.2fr 1.2fr;gap:8px}
+  button.big{padding:15px 8px}
+  #resetBtn{padding:15px 8px}
+  .app-footer{padding-bottom:18px}
+}
+
+/* Very small phones */
+@media(max-width:390px){
+  .brand-logo{width:42px;height:42px}
+  .moa-header h1{font-size:1.08rem}
+  .moa-header p{font-size:.68rem}
+  .regions{grid-template-columns:repeat(3,1fr)}
+  .region-btn{font-size:.78rem}
+}
+
+
+/* More / app management bottom sheet */
+.compact-actions{display:flex;gap:8px;align-items:center}
+.primary-lite{border-color:var(--accent);color:var(--accent-deep);background:var(--accent-soft)}
+.dark-more{background:var(--ink);border-color:var(--ink);color:#fff}
+.more-backdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,.48);
+  opacity:0;pointer-events:none;transition:.22s ease;z-index:180
+}
+.more-backdrop.show{opacity:1;pointer-events:auto}
+.more-sheet{
+  position:fixed;left:50%;bottom:0;transform:translate(-50%,105%);
+  width:min(100%,720px);max-height:90vh;overflow:auto;
+  background:#fff;border-radius:28px 28px 0 0;
+  padding:10px 22px calc(22px + env(safe-area-inset-bottom));
+  box-shadow:0 -18px 50px rgba(0,0,0,.18);
+  z-index:190;transition:transform .28s ease;
+}
+.more-sheet.show{transform:translate(-50%,0)}
+.more-handle{width:48px;height:5px;border-radius:999px;background:#d7dee2;margin:4px auto 14px}
+.more-sheet-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}
+.more-sheet-head h2{font-size:1.45rem;letter-spacing:-.04em}
+.more-sheet-head p{color:var(--ink-soft);font-size:.86rem;margin-top:5px}
+.sheet-close{border:0;background:#f1f4f5;width:38px;height:38px;border-radius:50%;font-size:1.4rem;cursor:pointer}
+.manage-list{display:grid;gap:10px}
+.manage-item{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  text-align:left;background:#fff;border:1.5px solid var(--line);
+  border-radius:18px;padding:16px 18px;cursor:pointer
+}
+.manage-item strong{display:block;font-size:1rem;color:var(--ink)}
+.manage-item span{display:block;color:var(--ink-soft);font-size:.8rem;line-height:1.45;margin-top:4px}
+.manage-item b{font-size:1.65rem;font-weight:400;color:#97a4ab}
+.sheet-status{
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--line);margin-top:18px;padding-top:16px;
+  color:var(--ink-soft);font-size:.82rem
+}
+.status-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#31a56f;margin-right:7px}
+.sheet-note{color:var(--ink-soft);font-size:.78rem;line-height:1.65;margin:12px 0 16px}
+.sheet-done{
+  width:100%;border:1.5px solid var(--line);border-radius:16px;
+  background:#fff;padding:15px;font:inherit;font-weight:800;cursor:pointer
+}
+body.sheet-open{overflow:hidden}
+
+@media(max-width:760px){
+  .compact-actions{width:100%;display:grid;grid-template-columns:1fr 1fr .8fr;gap:6px;margin-top:10px}
+  .compact-actions .mini-btn{font-size:.72rem;padding:9px 5px}
+  .more-sheet{width:100%;padding-left:18px;padding-right:18px}
+}
+@media(min-width:761px){
+  .more-sheet{bottom:18px;border-radius:28px}
+}
+
+
+/* ===== mobile layout polish: 2026.07.05-3 ===== */
+.brand-copy{min-width:0}
+.brand-copy p{
+  line-height:1.5;
+  color:var(--ink-soft);
+  word-break:keep-all;
+}
+
+/* region buttons */
+.region-btn{
+  flex-direction:column;
+  gap:4px;
+  text-align:center;
+  padding:10px 6px;
+}
+.region-btn .rb-ko{
+  display:block;
+  font-size:.98rem;
+  font-weight:900;
+  letter-spacing:-.03em;
+  line-height:1.12;
+  word-break:keep-all;
+}
+.region-btn .rb-en{
+  display:block;
+  font-size:.76rem;
+  font-weight:700;
+  color:#7a8995;
+  line-height:1.08;
+}
+.region-btn.on .rb-en{color:rgba(255,255,255,.82)}
+
+/* preview area */
+.preview-tools{
+  display:grid;
+  grid-template-columns:1fr 1.35fr;
+  gap:8px;
+  margin-bottom:10px;
+}
+.preview-tools .mini-btn{
+  width:100%;
+  min-height:46px;
+  font-size:.86rem;
+  font-weight:900;
+}
+.preview-note{
+  font-size:.79rem;
+  color:var(--ink-soft);
+  margin:0 0 10px;
+}
+.preview-shell{
+  border:1.5px solid var(--line);
+  border-radius:16px;
+  background:linear-gradient(180deg,#ffffff 0,#fbfdfe 100%);
+  padding:12px;
+}
+.preview-label{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:.78rem;
+  font-weight:900;
+  color:var(--ink-soft);
+  margin-bottom:8px;
+}
+.preview-label::before{
+  content:"●";
+  font-size:.62rem;
+  color:var(--accent);
+}
+
+#preview{
+  margin-top:0;
+  min-height:180px;
+  background:#fcfdfe;
+  border-style:solid;
+  border-radius:14px;
+}
+
+/* mobile polish */
+@media(max-width:760px){
+  .moa-header{
+    display:block;
+    padding:14px 14px 12px;
+  }
+  .brand-block{
+    display:grid;
+    grid-template-columns:54px minmax(0,1fr);
+    align-items:center;
+    column-gap:12px;
+    row-gap:4px;
+  }
+  .brand-logo{
+    width:54px;
+    height:54px;
+  }
+  .brand-copy h1{
+    font-size:1.28rem;
+    line-height:1.05;
+    margin-bottom:2px;
+  }
+  .brand-copy p{
+    font-size:.78rem;
+    line-height:1.45;
+  }
+  .compact-actions{
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-top:14px;
+  }
+  .compact-actions .mini-btn{
+    min-height:48px;
+    padding:10px 6px;
+    font-size:.78rem;
+    white-space:nowrap;
+  }
+
+  .patient-card .regions{
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+  }
+  .region-btn{
+    min-height:74px;
+    border-radius:16px;
+  }
+  .region-btn .rb-ko{font-size:.95rem}
+  .region-btn .rb-en{font-size:.72rem}
+
+  .preview-tools{
+    grid-template-columns:1fr 1fr;
+  }
+  .preview-tools .mini-btn{
+    min-height:48px;
+    font-size:.84rem;
+  }
+  .preview-shell{
+    padding:10px;
+  }
+  #preview{
+    min-height:170px;
+    padding:14px;
+    font-size:.92rem;
+  }
+}
+
+@media(max-width:430px){
+  .brand-block{
+    grid-template-columns:50px minmax(0,1fr);
+    column-gap:10px;
+  }
+  .brand-logo{width:50px;height:50px}
+  .brand-copy h1{font-size:1.22rem}
+  .brand-copy p{font-size:.74rem}
+  .compact-actions .mini-btn{
+    font-size:.74rem;
+    padding:10px 4px;
+  }
+  .region-btn{
+    min-height:76px;
+    padding:8px 5px;
+  }
+  .region-btn .rb-ko{font-size:.91rem}
+  .region-btn .rb-en{font-size:.69rem}
+  .preview-tools{
+    grid-template-columns:1fr;
+  }
+}
+
+
+/* Install / update information modal */
+.app-modal-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(10,22,30,.54);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .22s ease;
+  z-index:220;
+}
+.app-modal-backdrop.show{
+  opacity:1;
+  pointer-events:auto;
+}
+.app-modal{
+  position:fixed;
+  left:50%;
+  top:50%;
+  width:min(calc(100vw - 32px),430px);
+  transform:translate(-50%,-46%) scale(.98);
+  opacity:0;
+  pointer-events:none;
+  z-index:230;
+  background:#fff;
+  color:var(--ink);
+  border-radius:24px;
+  padding:24px 20px 18px;
+  box-shadow:0 24px 70px rgba(0,0,0,.24);
+  transition:opacity .22s ease,transform .22s ease;
+}
+.app-modal.show{
+  opacity:1;
+  pointer-events:auto;
+  transform:translate(-50%,-50%) scale(1);
+}
+.app-modal-icon{
+  width:56px;
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 14px;
+  border-radius:16px;
+  background:var(--ink);
+  color:#fff;
+  font-size:.82rem;
+  font-weight:900;
+  letter-spacing:.04em;
+}
+.app-modal h3{
+  text-align:center;
+  font-size:1.28rem;
+  letter-spacing:-.035em;
+  margin-bottom:10px;
+}
+.app-modal-body{
+  color:var(--ink-soft);
+  font-size:.9rem;
+  line-height:1.7;
+  text-align:left;
+}
+.app-modal-body strong{color:var(--ink)}
+.app-modal-body .modal-center{text-align:center}
+.app-modal-body .install-steps{
+  display:grid;
+  gap:9px;
+  margin-top:14px;
+}
+.app-modal-body .install-step{
+  display:grid;
+  grid-template-columns:30px 1fr;
+  gap:10px;
+  align-items:start;
+  padding:11px 12px;
+  background:#f7fafb;
+  border:1px solid var(--line);
+  border-radius:13px;
+}
+.app-modal-body .install-step b{
+  width:26px;height:26px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--accent-soft);
+  color:var(--accent-deep);
+  font-size:.78rem;
+}
+.app-modal-body .version-box{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:7px 14px;
+  margin-top:14px;
+  padding:14px;
+  background:#f7fafb;
+  border:1px solid var(--line);
+  border-radius:14px;
+}
+.app-modal-body .version-box span{color:var(--ink-soft)}
+.app-modal-body .version-box strong{font-variant-numeric:tabular-nums}
+.app-modal-actions{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+  margin-top:18px;
+}
+.app-modal-actions.two{grid-template-columns:1fr 1fr}
+.app-modal-actions button{
+  min-height:48px;
+  border-radius:14px;
+  font:inherit;
+  font-weight:900;
+  cursor:pointer;
+}
+.modal-secondary{
+  border:1.5px solid var(--line);
+  background:#fff;
+  color:var(--ink);
+}
+.modal-primary{
+  border:1.5px solid var(--accent);
+  background:var(--accent);
+  color:#fff;
+}
+.modal-dark{
+  border:1.5px solid var(--ink);
+  background:var(--ink);
+  color:#fff;
+}
+body.modal-open{overflow:hidden}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="moa-header">
+  <div class="brand-block">
+    <img class="brand-logo" src="icon-192.png" alt="MOA Charting">
+    <div class="brand-copy">
+      <h1>MOA Charting</h1>
+      <p>빠른 임상 기록 보조 · 선택하고 바로 차팅</p>
+    </div>
+  </div>
+  <div class="top-actions compact-actions">
+    <button class="mini-btn primary-lite" id="newChartTopBtn">＋ 새 차팅</button>
+    <button class="mini-btn" id="historyTopBtn">⌕ 이전 차팅</button>
+    <button class="mini-btn dark-more" id="moreBtn">⋯ 더보기</button>
+  </div>
+</header>
+
+<div class="card utility-card" id="dashCard"><div class="sec-tag"><span class="chip i">홈</span>최근 기록</div><div class="row2"><button class="mini-btn on" id="newChartBtn">+ 새 차팅</button><button class="mini-btn" id="duplicateLastBtn">마지막 차팅 이어쓰기</button></div><div class="subhead">이전 차팅 찾기</div>
+<div class="chart-search-wrap">
+  <div class="chart-search-row">
+    <input type="search" id="chartSearch" enterkeyhint="search" autocomplete="off" placeholder="환자명 · 코드 · 날짜 · 회차 · 부위 · 주호소 검색">
+    <button class="mini-btn" id="clearSearchBtn" type="button">초기화</button>
+  </div>
+  <div class="search-meta">
+    <span id="searchSummary">저장된 차팅 전체에서 검색합니다.</span>
+    <strong id="searchCount"></strong>
+  </div>
+</div>
+
+<div class="subhead">저장된 차팅</div>
+<div class="record-manage">
+  <button class="mini-btn" id="manageRecordsBtn">선택 삭제</button>
+  <button class="mini-btn hidden" id="selectAllBtn">전체 선택</button>
+  <button class="mini-btn danger hidden" id="deleteSelectedBtn">삭제 (0)</button>
+  <button class="mini-btn hidden" id="cancelManageBtn">취소</button>
+</div>
+<div class="list" id="recentList"><div class="hint">아직 저장된 차팅이 없습니다.</div></div><div class="notice">데이터는 현재 기기 브라우저에 저장됩니다. 여러 기기 동기화는 GitHub Pages 같은 주소에 올린 뒤 각 기기에서 백업/복원을 사용하세요.</div></div>
+
+<div class="card patient-card"><div class="sec-tag"><span class="chip i">1</span>환자 기본정보</div><div class="row3"><div><label class="fld">환자 이름</label><input type="text" id="pName" placeholder="홍길동"></div><div><label class="fld">회차</label><input type="number" id="pVisit" placeholder="3" min="1"></div><div><label class="fld">나이/성별</label><input type="text" id="pAgeSex" placeholder="42/M"></div></div><label class="fld">날짜</label><input type="date" id="pDate"><label class="fld">부위 (복수 선택 가능)</label><div class="regions" id="regionGrid"></div></div>
+
+<div class="card soap-card s-card"><div class="sec-tag"><span class="chip s">S</span>주관적 <span class="section-copy"><button data-copy="S">S 복사</button></span></div><div class="phrasebar" id="phraseS"></div><label class="fld">주호소</label><textarea id="sChief" placeholder="예: Rt. shoulder pain during abduction"></textarea><label class="fld">NRS (치료 전)</label><div class="nrs-grid" id="nrsPre"></div><label class="fld">통증 양상 (복수 선택)</label><div class="opt-grid" id="painPattern"></div><label class="fld">발병 경위</label><textarea id="sOnset" placeholder="예: Onset after lifting heavy object 2 weeks ago"></textarea></div>
+
+<div class="card soap-card o-card"><div class="sec-tag"><span class="chip o">O</span>객관적 <span class="section-copy"><button data-copy="O">O 복사</button></span></div><div class="subhead">스페셜 테스트 (+)</div><div id="stArea"><div class="hint">부위를 먼저 선택하세요</div></div><div class="subhead">ROM 제한</div><div id="romArea"><div class="hint">부위를 먼저 선택하세요</div></div><div class="subhead">MMT 약화</div><div id="mmtArea"><div class="hint">부위를 먼저 선택하세요</div></div></div>
+
+<div class="card soap-card a-card"><div class="sec-tag"><span class="chip a">A</span>평가 <span class="section-copy"><button data-copy="A">A 복사</button></span></div><div class="phrasebar" id="phraseA"></div><textarea id="aText" placeholder="예: RCRSP suspected, continued manual therapy needed"></textarea></div>
+
+<div class="card soap-card p-card"><div class="sec-tag"><span class="chip p">P</span>계획 <span class="section-copy"><button data-copy="P">P 복사</button></span></div><div class="phrasebar" id="phraseP"></div><label class="fld">시행 기법</label><textarea id="pTech" placeholder="예: Grade III GH joint mobilization, 15 min"></textarea><label class="fld">NRS (치료 후)</label><div class="nrs-grid" id="nrsPost"></div><label class="fld">치료 반응</label><textarea id="pResp" placeholder="예: ROM improved, pain decreased post Tx"></textarea></div>
+
+<div class="card preview-card"><div class="sec-tag"><span class="chip i">출력</span>차팅 미리보기</div><div class="preview-tools"><button class="mini-btn" id="cleanBtn">문장 정리</button><button class="mini-btn" id="copySubjectBtn">S/O/A/P 전체 복사</button></div><div class="preview-note">선택한 내용이 아래에 실시간으로 정리됩니다.</div><div class="preview-shell"><div class="preview-label">미리 생성된 차팅</div><div id="preview" class="empty">항목을 입력하면 여기에 차팅이 생성됩니다</div></div></div>
+<footer class="app-footer">MOA Charting Beta v2026.07.06-3 · © MOA BUSAN · @physio_geun_1</footer>
+</div>
+<div class="bottombar">
+  <div class="inner">
+    <button class="big" id="resetBtn">초기화</button>
+    <button class="big" id="saveBtn">💾 저장</button>
+    <button class="big" id="copyBtn">📋 복사</button>
+  </div>
+  <div class="desktop-copyright">MOA Charting Beta v2026.07.06-3 · © MOA BUSAN · @physio_geun_1</div>
+</div><div class="toast" id="toast">복사 완료</div>
+
+<div class="more-backdrop" id="moreBackdrop"></div>
+<section class="more-sheet" id="moreSheet" aria-hidden="true">
+  <div class="more-handle"></div>
+  <div class="more-sheet-head">
+    <div>
+      <h2>웹앱 관리</h2>
+      <p>설치, 전체 백업·복원, 업데이트를 한곳에서 관리합니다.</p>
+    </div>
+    <button class="sheet-close" id="closeMoreBtn" type="button">×</button>
+  </div>
+
+  <div class="manage-list">
+    <button class="manage-item" id="installHelpBtn" type="button">
+      <div>
+        <strong>홈 화면에 설치</strong>
+        <span>아이폰·안드로이드에서 앱처럼 사용합니다.</span>
+      </div>
+      <b>›</b>
+    </button>
+
+    <button class="manage-item" id="backupBtn" type="button">
+      <div>
+        <strong>전체 데이터 백업</strong>
+        <span>저장된 차팅과 현재 작업을 JSON 하나로 저장합니다.</span>
+      </div>
+      <b>›</b>
+    </button>
+
+    <button class="manage-item" id="restoreBtn" type="button">
+      <div>
+        <strong>전체 백업 복원</strong>
+        <span>기존 저장 차팅과 안전하게 합쳐서 복원합니다.</span>
+      </div>
+      <b>›</b>
+    </button>
+
+    <button class="manage-item" id="updateCheckBtn" type="button">
+      <div>
+        <strong>업데이트 확인</strong>
+        <span id="updateMenuText">현재 버전 v2026.07.06-3 · 새 버전을 확인합니다.</span>
+      </div>
+      <b>›</b>
+    </button>
+
+    <button class="manage-item" id="themeBtn" type="button">
+      <div>
+        <strong>화면 모드 변경</strong>
+        <span>라이트·다크 모드를 전환합니다.</span>
+      </div>
+      <b>›</b>
+    </button>
+  </div>
+
+  <div class="sheet-status">
+    <span><i class="status-dot"></i> 온라인</span>
+    <strong id="currentVersionLabel">v2026.07.06-3</strong>
+  </div>
+  <p class="sheet-note">저장된 차팅은 이 기기·이 브라우저에 보관됩니다. 업데이트·앱 삭제·기기 변경 전 전체 백업을 권장합니다.</p>
+  <button class="sheet-done" id="sheetDoneBtn" type="button">닫기</button>
+  <input class="hidden" type="file" id="restoreFile" accept="application/json">
+</section>
+
+
+
+<div class="app-modal-backdrop" id="appModalBackdrop"></div>
+<section class="app-modal" id="appModal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="app-modal-icon" id="appModalIcon">MOA</div>
+  <h3 id="appModalTitle">안내</h3>
+  <div class="app-modal-body" id="appModalBody"></div>
+  <div class="app-modal-actions" id="appModalActions">
+    <button class="modal-secondary" id="appModalCloseBtn" type="button">닫기</button>
+  </div>
+</section>
+
+<div class="update-banner" id="updateBanner" role="status" aria-live="polite">
+  <div>
+    <strong>새 버전이 있습니다</strong>
+    <span>저장된 차팅은 유지됩니다.</span>
+  </div>
+  <button id="updateNowBtn" type="button">지금 업데이트</button>
+</div>
+
+<script>
+const DATA={"Cervical":{st:[{n:"Spurling test",s:"Rule-in · Sp .93"},{n:"Cervical distraction test",s:"Sp .90"},{n:"ULTT (median)",s:"Rule-out · Sn .97"},{n:"Flexion-rotation test",s:"CGH · Sn .90/Sp .88"},{n:"Sharp-Purser test",s:"상위경추 불안정"},{n:"Vertebral artery test",s:"VBI screening"},{n:"Cervical rotation <60°",s:"CGH 지표"},{n:"Myotome/Dermatome/Reflex exam",s:"신경학적 검사"},{n:"Hoffmann sign",s:"UMN screening · 경수증"},{n:"Babinski sign",s:"UMN screening · 경수증"},{n:"Wainner CPR (Spurling+distraction+ULTT+rotation<60°, 3/4↑)",s:"Rule-in cluster · Sp .94, +LR 6.1"}],rom:["Flexion","Extension","Lt. lateral flexion","Rt. lateral flexion","Lt. rotation","Rt. rotation"],mmt:["Cervical flexion","Cervical extension","Lt. lateral flexion","Rt. lateral flexion","Deep neck flexor (CCFT)"]},"Thoracic":{st:[{n:"Thoracic rotation test",s:""},{n:"Rib spring test",s:""},{n:"Adam forward bend test",s:"측만 screening"},{n:"Cervical rotation lateral flexion test",s:"1st rib"}],rom:["Flexion","Extension","Lt. lateral flexion","Rt. lateral flexion","Lt. rotation","Rt. rotation"],mmt:["Trunk extension","Scapular retraction"]},"Lumbar":{st:[{n:"SLR",s:"Rule-out · Sn .92/Sp .28"},{n:"Crossed SLR",s:"Rule-in · Sn .28/Sp .90"},{n:"Slump test",s:"Sn .84/Sp .83"},{n:"Femoral nerve tension test",s:"상위요추 신경근"},{n:"Kemp / Quadrant test",s:"Facet"},{n:"Extension-rotation test",s:"Facet"},{n:"PA spring test",s:"분절 irritability"},{n:"Prone instability test",s:"불안정성"},{n:"Passive lumbar extension test",s:"불안정성 · Sn .84/Sp .90"},{n:"Romberg test",s:"Stenosis screening"},{n:"Myotome/Dermatome/Reflex exam",s:"신경학적 검사"}],rom:["Flexion","Extension","Lt. lateral flexion","Rt. lateral flexion","Lt. rotation","Rt. rotation"],mmt:["Trunk flexion","Trunk extension","Hip flexion (L2-3)","Knee extension (L3-4)","Ankle dorsiflexion (L4-5)","Great toe extension (L5)","Plantarflexion/heel raise (S1)"]},"SI Joint":{st:[{n:"Distraction test",s:"Laslett cluster"},{n:"Compression test",s:"Laslett cluster"},{n:"Thigh thrust test",s:"Laslett cluster"},{n:"Sacral thrust test",s:"Laslett cluster"},{n:"Gaenslen test",s:"Laslett cluster"},{n:"FABER / Patrick test",s:""},{n:"Laslett cluster ≥3/5 (+)",s:"Sn .91-.94/Sp .78"},{n:"Gillet test",s:""}],rom:[],mmt:["Hip extension","Hip abduction"]},"Shoulder":{st:[{n:"Neer test",s:"Sn .78"},{n:"Hawkins-Kennedy test",s:"Sn .79"},{n:"Painful arc",s:"Sn .74/Sp .81"},{n:"Empty can test",s:"Supraspinatus"},{n:"Full can test",s:"Supraspinatus"},{n:"Drop arm test",s:"Rule-in · Sp .92"},{n:"ER lag sign",s:"Infra/supra · Sp .94"},{n:"Infraspinatus strength test",s:"RCT screening"},{n:"Lift-off test",s:"Subscapularis"},{n:"Belly press test",s:"Subscapularis"},{n:"Bear hug test",s:"Subscapularis · Sn .79"},{n:"Speed test",s:"Biceps/SLAP"},{n:"Yergason test",s:"Biceps · Sp .79"},{n:"O'Brien test",s:"SLAP"},{n:"Apprehension test",s:"전방 불안정"},{n:"Relocation test",s:"Sp .90"},{n:"Sulcus sign",s:"하방 불안정"},{n:"Cross-body adduction test",s:"AC joint"},{n:"Full-thickness RCT cluster (Painful arc+Drop arm+Infraspinatus, 3/3↑)",s:"Rule-in · +LR 15.6"},{n:"Impingement cluster (Hawkins-Kennedy+Painful arc+Infraspinatus, 3/3↑)",s:"+LR 10.6"}],rom:["Flexion","Extension","Abduction","Adduction","Internal rotation","External rotation","Horizontal adduction"],mmt:["Shoulder flexion","Shoulder abduction","Internal rotation","External rotation","Scapular protraction (SA)","Scapular retraction (MT/LT)"]},"Elbow":{st:[{n:"Cozen test",s:"Lateral epicondylalgia"},{n:"Mill test",s:"Lateral epicondylalgia"},{n:"Maudsley test",s:"3rd finger ext"},{n:"Moving valgus stress test",s:"UCL · Sn 1.0/Sp .75"},{n:"Valgus stress test",s:"UCL"},{n:"Varus stress test",s:"LCL"},{n:"Tinel sign (elbow)",s:"Ulnar n."}],rom:["Flexion","Extension","Pronation","Supination"],mmt:["Elbow flexion","Elbow extension","Pronation","Supination","Grip strength"]},"Wrist/Hand":{st:[{n:"Phalen test",s:"CTS · Sn .68"},{n:"Reverse Phalen test",s:"CTS"},{n:"Durkan compression test",s:"CTS · Sn .87/Sp .90"},{n:"Tinel sign (wrist)",s:"CTS"},{n:"Finkelstein/Eichhoff test",s:"De Quervain"},{n:"Watson scaphoid shift test",s:"SL 불안정"},{n:"TFCC compression test",s:"척측 손목통증"}],rom:["Flexion","Extension","Radial deviation","Ulnar deviation"],mmt:["Wrist flexion","Wrist extension","Radial deviation","Ulnar deviation","Grip strength","Finger flexion","Finger extension"]},"Hip":{st:[{n:"FADIR test",s:"FAI Rule-out · Sn .94-.99"},{n:"FABER test",s:"Sn .81-.82 · 서혜부 통증 재현"},{n:"Scour test",s:"관절내 병리"},{n:"Stinchfield test",s:"저항성 SLR 20-30°"},{n:"Squat pain",s:"Hip OA 지표"},{n:"Hip IR <25°",s:"Hip OA 지표"},{n:"30-sec single-leg stance",s:"GTPS Rule-in · Sn 1.0/Sp .97"},{n:"Greater trochanter palpation",s:"GTPS Rule-out · Sn .83"},{n:"Resisted abduction (ADD-R)",s:"GTPS · Sn .71/Sp .84"},{n:"FADER-R test",s:"GTPS Rule-in"},{n:"Thomas test",s:"굴곡구축/장요근"},{n:"Ober test",s:"ITB"},{n:"Trendelenburg test",s:"중둔근 기능"},{n:"Puranen-Orava test",s:"PHT · 좌골결절 통증 유발"},{n:"Bent-knee stretch test",s:"PHT"},{n:"Modified bent-knee stretch test",s:"PHT"},{n:"Altman Hip OA 기준",s:"Sn .86/Sp .75",full:"Hip OA 임상기준(Altman): 내회전 통증+조조강직>60min+50세↑, 또는 내회전<15°+굴곡≤115°"}],rom:["Flexion","Extension","Abduction","Adduction","Internal rotation","External rotation"],mmt:["Hip flexion","Hip extension","Hip abduction","Hip adduction","Internal rotation","External rotation"]},"Knee":{st:[{n:"Lachman test",s:"ACL · Sn .85/Sp .94"},{n:"Anterior drawer test",s:"ACL"},{n:"Pivot shift test",s:"ACL Rule-in · Sp .98"},{n:"Posterior drawer test",s:"PCL · Sn .90"},{n:"McMurray test",s:"Meniscus · Sp .78"},{n:"Thessaly test",s:"Meniscus"},{n:"Joint line tenderness",s:"Meniscus · Sn .83"},{n:"Valgus stress test",s:"MCL"},{n:"Varus stress test",s:"LCL"},{n:"Patellar apprehension test",s:"슬개골 불안정"},{n:"Clarke test",s:"PFPS"}],rom:["Flexion","Extension"],mmt:["Knee flexion","Knee extension"]},"Ankle/Foot":{st:[{n:"Anterior drawer test",s:"ATFL"},{n:"Talar tilt test",s:"CFL"},{n:"Thompson test",s:"Achilles rupture"},{n:"Squeeze test",s:"Syndesmosis"},{n:"External rotation test",s:"Syndesmosis"},{n:"Windlass test",s:"Plantar fascia"},{n:"Navicular drop test",s:"과회내"}],rom:["Dorsiflexion","Plantarflexion","Inversion","Eversion"],mmt:["Dorsiflexion","Plantarflexion/heel raise","Inversion","Eversion","Great toe extension"]}};
+const REGION_KO={"Cervical":"경추","Thoracic":"흉추","Lumbar":"요추","SI Joint":"천장관절","Shoulder":"어깨","Elbow":"팔꿈치","Wrist/Hand":"손목·손","Hip":"고관절","Knee":"무릎","Ankle/Foot":"발목·발"};const REGION_ORDER=Object.keys(DATA);const $=id=>document.getElementById(id);const PAIN_PATTERNS=["아침 통증","야간통","활동 시 통증","안정 시 통증","앉아 있을 때 통증","기립/보행 시 통증","지속적 통증","간헐적 통증"];let regions=new Set(),sel={st:new Set(),rom:new Set(),mmt:new Set(),pain:new Set()},nrsPre=null,nrsPost=null,currentId=null,manageRecords=false,selectedRecordIds=new Set(),chartSearchQuery='';const LS="chartingPWA.v1";const state=()=>JSON.parse(localStorage.getItem(LS)||'{"records":[],"draft":{},"theme":"light"}');const saveState=s=>localStorage.setItem(LS,JSON.stringify(s));function setToday(){let d=new Date();$("pDate").value=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}function fields(){return {pName:$('pName').value,pVisit:$('pVisit').value,pAgeSex:$('pAgeSex').value,pDate:$('pDate').value,sChief:$('sChief').value,sOnset:$('sOnset').value,aText:$('aText').value,pTech:$('pTech').value,pResp:$('pResp').value,regions:[...regions],st:[...sel.st],rom:[...sel.rom],mmt:[...sel.mmt],pain:[...sel.pain],nrsPre,nrsPost,currentId}}function apply(d={}){['pName','pVisit','pAgeSex','pDate','sChief','sOnset','aText','pTech','pResp'].forEach(id=>$(id).value=d[id]||'');regions=new Set(d.regions||[]);sel={st:new Set(d.st||[]),rom:new Set(d.rom||[]),mmt:new Set(d.mmt||[]),pain:new Set(d.pain||[])};nrsPre=d.nrsPre??null;nrsPost=d.nrsPost??null;currentId=d.currentId||null;document.querySelectorAll('.region-btn').forEach((b,i)=>b.classList.toggle('on',regions.has(REGION_ORDER[i])));renderPain();document.querySelectorAll('#nrsPre .nrs').forEach((e,i)=>e.classList.toggle('on',i===nrsPre));document.querySelectorAll('#nrsPost .nrs').forEach((e,i)=>e.classList.toggle('on',i===nrsPost));if(!$("pDate").value)setToday();renderOpts();render()}
+function persistDraft(){let s=state();s.draft=fields();saveState(s)}function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function openMoreSheet(){
+  $('moreBackdrop').classList.add('show');
+  $('moreSheet').classList.add('show');
+  $('moreSheet').setAttribute('aria-hidden','false');
+  document.body.classList.add('sheet-open');
+}
+function closeMoreSheet(){
+  $('moreBackdrop').classList.remove('show');
+  $('moreSheet').classList.remove('show');
+  $('moreSheet').setAttribute('aria-hidden','true');
+  document.body.classList.remove('sheet-open');
+}
+
+REGION_ORDER.forEach(r=>{const b=document.createElement('button');b.type='button';b.className='region-btn';b.innerHTML="<span class='rb-ko'>"+REGION_KO[r]+"</span><span class='rb-en'>"+r.replace('/',' / ')+"</span>";b.onclick=()=>{if(regions.has(r)){regions.delete(r);['st','rom','mmt'].forEach(k=>[...sel[k]].forEach(key=>{if(key.startsWith(r+'|'))sel[k].delete(key)}));}else regions.add(r);b.classList.toggle('on',regions.has(r));renderOpts();render();persistDraft()};$('regionGrid').appendChild(b)});
+function buildArea(areaId,key,isObj){const area=$(areaId);area.innerHTML='';const active=REGION_ORDER.filter(r=>regions.has(r));if(!active.length){area.innerHTML="<div class='hint'>부위를 먼저 선택하세요</div>";return}let any=false;active.forEach(r=>{const items=DATA[r][key];if(!items.length)return;any=true;if(active.length>1){let h=document.createElement('div');h.className='region-sub';h.textContent='▸ '+REGION_KO[r]+' ('+r+')';area.appendChild(h)}let g=document.createElement('div');g.className='opt-grid';items.forEach(item=>{const name=isObj?item.n:item,subT=isObj?item.s:'',k=r+'|'+name,c=document.createElement('div');c.className='opt'+(sel[key].has(k)?' on':'');c.innerHTML=name+(subT?'<small>'+subT+'</small>':'');c.onclick=()=>{sel[key].has(k)?sel[key].delete(k):sel[key].add(k);c.classList.toggle('on');render();persistDraft()};g.appendChild(c)});area.appendChild(g)});if(!any)area.innerHTML="<div class='hint'>해당 항목 없음</div>"}function renderOpts(){buildArea('stArea','st',true);buildArea('romArea','rom',false);buildArea('mmtArea','mmt',false)}
+function buildNRS(gridId,side){const g=$(gridId);for(let i=0;i<=10;i++){const c=document.createElement('div');c.className='nrs'+(side==='post'?' p-side':'');c.textContent=i;c.onclick=()=>{let cur=side==='pre'?nrsPre:nrsPost,val=cur===i?null:i;if(side==='pre')nrsPre=val;else nrsPost=val;[...g.children].forEach((el,idx)=>el.classList.toggle('on',idx===val));render();persistDraft()};g.appendChild(c)}}buildNRS('nrsPre','pre');buildNRS('nrsPost','post');
+function renderPain(){const area=$('painPattern');if(!area)return;area.innerHTML='';PAIN_PATTERNS.forEach(p=>{const c=document.createElement('div');c.className='opt'+(sel.pain.has(p)?' on':'');c.textContent=p;c.onclick=()=>{sel.pain.has(p)?sel.pain.delete(p):sel.pain.add(p);c.classList.toggle('on');render();persistDraft()};area.appendChild(c)})}renderPain();
+const phrases={S:['통증은 이전보다 감소함','특정 동작 시 통증 잔존','야간통은 감소함','일상생활 불편감 감소'],A:['ROM 제한 및 통증으로 기능 저하','연부조직 긴장 및 관절가동성 저하','도수치료 및 운동교육 지속 필요','증상 호전 추세'],P:['STM 및 joint mobilization 시행','통증 범위 내 ROM exercise 교육','HEP 재교육','치료 후 통증 감소 및 움직임 개선']};function addPhrase(area,id){phrases[area].forEach(p=>{let b=document.createElement('button');b.className='phrase';b.textContent=p;b.onclick=()=>{const target=area==='S'?'sChief':area==='A'?'aText':'pTech';$(target).value=($(target).value?$(target).value+'\n':'')+p;render();persistDraft()};$(id).appendChild(b)})}addPhrase('S','phraseS');addPhrase('A','phraseA');addPhrase('P','phraseP');
+function stFullText(r,name){const item=(DATA[r].st||[]).find(t=>t.n===name);return item&&item.full?item.full:name}
+function groupText(key){const active=REGION_ORDER.filter(r=>regions.has(r)),parts=[];active.forEach(r=>{const names=[...sel[key]].filter(k=>k.startsWith(r+'|')).map(k=>{const nm=k.split('|')[1];return key==='st'?stFullText(r,nm):nm});if(names.length)parts.push(active.length>1?'['+r+'] '+names.join(', '):names.join(', '))});return parts.join(' / ')}function sections(){let f=fields(),S=[],O=[],A=[],P=[];let sLine=f.sChief.trim();if(nrsPre!==null)sLine+=(sLine?', ':'')+'NRS '+nrsPre+'/10';if(sLine)S.push('[S] 주호소: '+sLine);if(sel.pain.size)S.push('[S] 통증 양상: '+[...sel.pain].join(', '));if(f.sOnset.trim())S.push('[S] 발병경위: '+f.sOnset.trim());let st=groupText('st');if(st)O.push('[O] 스페셜테스트(+): '+st);let rom=groupText('rom');if(rom)O.push('[O] ROM 제한: '+rom);let mmt=groupText('mmt');if(mmt)O.push('[O] MMT 약화: '+mmt);if(f.aText.trim())A.push('[A] 평가: '+f.aText.trim());if(f.pTech.trim())P.push('[P] 시행기법: '+f.pTech.trim());let respLine='';if(nrsPre!==null&&nrsPost!==null)respLine='NRS '+nrsPre+' → '+nrsPost+' post Tx';else if(nrsPost!==null)respLine='치료 후 NRS '+nrsPost+'/10';if(f.pResp.trim())respLine+=(respLine?', ':'')+f.pResp.trim();if(respLine)P.push('[P] 치료반응: '+respLine);return {S:S.join('\n'),O:O.join('\n'),A:A.join('\n'),P:P.join('\n')}}function buildText(){let f=fields(),head=[];let h=f.pName.trim();if(f.pVisit)h+=(h?' ':'')+f.pVisit+'회차';if(f.pDate)h+=(h?' ':'')+'('+f.pDate+')';if(h)head.push(h);if(f.pAgeSex.trim())head.push('나이/성별: '+f.pAgeSex.trim());if(regions.size)head.push('부위: '+REGION_ORDER.filter(r=>regions.has(r)).join(', '));let sec=sections(),body=[sec.S,sec.O,sec.A,sec.P].filter(Boolean).join('\n');return (head.length?head.join('\n')+(body?'\n\n':''):'')+body}function render(){const t=buildText(),p=$('preview');if(t){p.textContent=t;p.classList.remove('empty')}else{p.textContent='항목을 입력하면 여기에 차팅이 생성됩니다';p.classList.add('empty')}renderRecent()}document.querySelectorAll('input,textarea').forEach(el=>el.addEventListener('input',()=>{render();persistDraft()}));
+async function copyText(t,msg='복사 완료'){if(!t){toast('복사할 내용이 없습니다');return}try{await navigator.clipboard.writeText(t);toast(msg)}catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);toast(msg)}}$('copyBtn').onclick=() => copyText(buildText(),'복사 완료 — EMR에 붙여넣으세요');$('copySubjectBtn').onclick=() => copyText(buildText(),'전체 복사 완료');document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>copyText(sections()[b.dataset.copy],b.dataset.copy+' 복사 완료'));
+$('saveBtn').onclick=()=>{let s=state(),f=fields(),id=currentId||String(Date.now());f.currentId=id;f.savedAt=new Date().toISOString();currentId=id;let idx=s.records.findIndex(r=>r.currentId===id);if(idx>=0)s.records[idx]=f;else s.records.unshift(f);s.records=s.records.slice(0,200);s.draft=f;saveState(s);toast('저장 완료')};
+function normalizeSearch(v){
+  return String(v||'').toLowerCase().replace(/\s+/g,' ').trim();
+}
+function searchableRecordText(r){
+  const visitText=r.pVisit?`${r.pVisit}회차 ${r.pVisit}회`:'';
+  return normalizeSearch([
+    r.pName,r.pVisit,visitText,r.pAgeSex,r.pDate,
+    ...(r.regions||[]),
+    r.sChief,r.sOnset,r.aText,r.pTech,r.pResp
+  ].join(' '));
+}
+function filteredRecords(){
+  const records=state().records||[];
+  const q=normalizeSearch(chartSearchQuery);
+  if(!q)return records;
+  const terms=q.split(' ').filter(Boolean);
+  return records.filter(r=>{
+    const hay=searchableRecordText(r);
+    return terms.every(term=>hay.includes(term));
+  });
+}
+function updateSearchSummary(total,shown){
+  const q=normalizeSearch(chartSearchQuery);
+  $('clearSearchBtn').disabled=!q;
+  if(q){
+    $('searchSummary').textContent=`“${chartSearchQuery.trim()}” 검색 결과`;
+    $('searchCount').textContent=`${shown}건`;
+  }else{
+    $('searchSummary').textContent='저장된 차팅 전체에서 검색합니다.';
+    $('searchCount').textContent=total?`${total}건`:'';
+  }
+}
+function updateManageButtons(){
+  const count=selectedRecordIds.size;
+  $('manageRecordsBtn').classList.toggle('hidden',manageRecords);
+  $('selectAllBtn').classList.toggle('hidden',!manageRecords);
+  $('deleteSelectedBtn').classList.toggle('hidden',!manageRecords);
+  $('cancelManageBtn').classList.toggle('hidden',!manageRecords);
+  $('deleteSelectedBtn').textContent='삭제 ('+count+')';
+  $('deleteSelectedBtn').disabled=count===0;
+}
+function renderRecent(){
+  const list=$('recentList'),s=state();
+  const filtered=filteredRecords();
+  list.innerHTML='';
+  updateManageButtons();
+  updateSearchSummary(s.records.length,filtered.length);
+
+  if(!s.records.length){
+    list.innerHTML="<div class='hint'>아직 저장된 차팅이 없습니다.</div>";
+    return;
+  }
+  if(!filtered.length){
+    list.innerHTML="<div class='search-empty'>검색 결과가 없습니다.</div>";
+    return;
+  }
+
+  const records=(manageRecords||normalizeSearch(chartSearchQuery))?filtered:filtered.slice(0,8);
+
+  records.forEach(r=>{
+    let item=document.createElement('div');
+    item.className='item'+(manageRecords?' manage':'');
+    const body=`<div class="item-body">
+      <strong>${r.pName||'이름 없음'} ${r.pVisit? r.pVisit+'회차':''}</strong>
+      <span>${r.pDate||''} · ${(r.regions||[]).join(', ')||'부위 미선택'}${r.pAgeSex?' · '+r.pAgeSex:''}</span>
+      <span>${(r.sChief||r.aText||r.pResp||'저장된 차팅').slice(0,80)}</span>
+    </div>`;
+
+    if(manageRecords){
+      const checked=selectedRecordIds.has(r.currentId)?' checked':'';
+      item.innerHTML=`<input type="checkbox" aria-label="차팅 선택"${checked}>${body}`;
+      const cb=item.querySelector('input[type=checkbox]');
+      const toggle=()=>{
+        if(selectedRecordIds.has(r.currentId)) selectedRecordIds.delete(r.currentId);
+        else selectedRecordIds.add(r.currentId);
+        cb.checked=selectedRecordIds.has(r.currentId);
+        updateManageButtons();
+      };
+      cb.onclick=e=>{e.stopPropagation();toggle()};
+      item.onclick=toggle;
+    }else{
+      item.innerHTML=body;
+      item.onclick=()=>{
+        apply(r);
+        $('chartSearch').value='';
+        chartSearchQuery='';
+        renderRecent();
+        toast('이전 차팅 불러옴');
+      };
+    }
+    list.appendChild(item);
+  });
+}
+
+$('chartSearch').addEventListener('input',e=>{
+  chartSearchQuery=e.target.value;
+  selectedRecordIds.clear();
+  renderRecent();
+});
+$('clearSearchBtn').onclick=()=>{
+  $('chartSearch').value='';
+  chartSearchQuery='';
+  selectedRecordIds.clear();
+  renderRecent();
+  $('chartSearch').focus();
+};
+$('manageRecordsBtn').onclick=()=>{
+  manageRecords=true;
+  selectedRecordIds.clear();
+  renderRecent();
+};
+$('cancelManageBtn').onclick=()=>{
+  manageRecords=false;
+  selectedRecordIds.clear();
+  renderRecent();
+};
+$('selectAllBtn').onclick=()=>{
+  const records=filteredRecords();
+  const ids=records.map(r=>r.currentId);
+  const allSelected=ids.length&&ids.every(id=>selectedRecordIds.has(id));
+  if(allSelected) ids.forEach(id=>selectedRecordIds.delete(id));
+  else ids.forEach(id=>selectedRecordIds.add(id));
+  renderRecent();
+};
+$('deleteSelectedBtn').onclick=()=>{
+  const count=selectedRecordIds.size;
+  if(!count){toast('삭제할 차팅을 선택하세요');return}
+  if(!confirm('선택한 '+count+'개의 차팅을 삭제하시겠습니까?')) return;
+  let s=state();
+  const deletingCurrent=currentId&&selectedRecordIds.has(currentId);
+  s.records=s.records.filter(r=>!selectedRecordIds.has(r.currentId));
+  if(deletingCurrent){
+    currentId=null;
+    s.draft=fields();
+    s.draft.currentId=null;
+  }
+  saveState(s);
+  selectedRecordIds.clear();
+  manageRecords=false;
+  renderRecent();
+  toast(count+'개 차팅 삭제 완료');
+};
+
+$('moreBtn').onclick=openMoreSheet;
+$('closeMoreBtn').onclick=closeMoreSheet;
+$('sheetDoneBtn').onclick=closeMoreSheet;
+$('moreBackdrop').onclick=closeMoreSheet;
+$('newChartTopBtn').onclick=()=>$('newChartBtn').click();
+$('historyTopBtn').onclick=()=>{
+  closeMoreSheet();
+  $('chartSearch').scrollIntoView({behavior:'smooth',block:'center'});
+  setTimeout(()=>$('chartSearch').focus(),350);
+};
+$('updateCheckBtn').onclick=async()=>{
+  closeMoreSheet();
+  openAppModal({
+    icon:'↻',
+    title:'업데이트 확인 중',
+    body:'<div class="modal-center">GitHub에서 최신 버전을 확인하고 있습니다.</div>'
+  });
+
+  const result=await checkForAppUpdate();
+
+  if(result.error||!result.remoteVersion){
+    openAppModal({
+      icon:'!',
+      title:'업데이트 확인 실패',
+      body:`<div class="modal-center">인터넷 연결을 확인한 뒤 다시 시도해 주세요.</div>
+      <div class="version-box"><span>현재 버전</span><strong>v${APP_VERSION}</strong></div>`
+    });
+    return;
+  }
+
+  if(result.hasUpdate){
+    openAppModal({
+      icon:'NEW',
+      title:'새 버전이 있습니다',
+      body:`<div class="modal-center">저장된 차팅은 유지됩니다.<br>업데이트 전 중요한 기록은 백업을 권장합니다.</div>
+      <div class="version-box">
+        <span>현재 버전</span><strong>v${result.currentVersion}</strong>
+        <span>최신 버전</span><strong>v${result.remoteVersion}</strong>
+      </div>`,
+      primaryText:'지금 업데이트',
+      primaryAction:()=>{
+        closeAppModal();
+        $('updateNowBtn').click();
+      },
+      primaryStyle:'dark'
+    });
+  }else{
+    openAppModal({
+      icon:'✓',
+      title:'최신 버전입니다',
+      body:`<div class="modal-center">현재 MOA Charting이 최신 상태입니다.</div>
+      <div class="version-box">
+        <span>현재 버전</span><strong>v${result.currentVersion}</strong>
+        <span>최신 버전</span><strong>v${result.remoteVersion}</strong>
+      </div>`
+    });
+  }
+};
+
+$('newChartBtn').onclick=()=>{apply({});setToday();persistDraft();toast('새 차팅')};$('duplicateLastBtn').onclick=()=>{let s=state(),r=s.records[0];if(!r){toast('저장된 차팅이 없습니다');return}let copy={...r,currentId:null,pVisit:r.pVisit?String(Number(r.pVisit)+1):'',pDate:''};apply(copy);setToday();persistDraft();toast('마지막 차팅 이어쓰기')};$('resetBtn').onclick=()=>{apply({});setToday();persistDraft();toast('초기화 완료')};
+$('cleanBtn').onclick=()=>{let map=[['좀 좋아짐','증상은 이전보다 호전됨'],['좋아짐','호전됨'],['아픔','통증 호소'],['줄음','감소함'],['늘음','증가함']];['sChief','sOnset','aText','pTech','pResp'].forEach(id=>{let v=$(id).value;map.forEach(([a,b])=>v=v.replaceAll(a,b));$(id).value=v.trim()});render();persistDraft();toast('문장 정리 완료')};
+$('themeBtn').onclick=()=>{let s=state();s.theme=s.theme==='dark'?'light':'dark';saveState(s);applyTheme()};function applyTheme(){let s=state();document.documentElement.dataset.theme=s.theme==='dark'?'dark':'light';$('themeBtn').textContent=s.theme==='dark'?'☀️ 라이트':'🌙 다크'}
+$('backupBtn').onclick=()=>{const blob=new Blob([JSON.stringify(state(),null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='charting-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(a.href)};$('restoreBtn').onclick=()=>$('restoreFile').click();$('restoreFile').onchange=e=>{let file=e.target.files[0];if(!file)return;let fr=new FileReader();fr.onload=()=>{try{saveState(JSON.parse(fr.result));applyTheme();apply(state().draft||{});toast('복원 완료')}catch(e){toast('복원 실패')}};fr.readAsText(file)};
+
+
+let deferredInstallPrompt=null;
+
+function isStandaloneMode(){
+  return window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone===true;
+}
+function getDeviceType(){
+  const ua=navigator.userAgent||'';
+  if(/iPad|iPhone|iPod/.test(ua))return 'ios';
+  if(/Android/i.test(ua))return 'android';
+  return 'desktop';
+}
+function openAppModal({icon='MOA',title='안내',body='',primaryText='',primaryAction=null,primaryStyle='primary'}){
+  $('appModalIcon').textContent=icon;
+  $('appModalTitle').textContent=title;
+  $('appModalBody').innerHTML=body;
+  const actions=$('appModalActions');
+  actions.className='app-modal-actions';
+  actions.innerHTML='';
+
+  const close=document.createElement('button');
+  close.type='button';
+  close.className='modal-secondary';
+  close.textContent='닫기';
+  close.onclick=closeAppModal;
+
+  if(primaryText&&primaryAction){
+    actions.classList.add('two');
+    actions.appendChild(close);
+    const primary=document.createElement('button');
+    primary.type='button';
+    primary.className=primaryStyle==='dark'?'modal-dark':'modal-primary';
+    primary.textContent=primaryText;
+    primary.onclick=primaryAction;
+    actions.appendChild(primary);
+  }else{
+    actions.appendChild(close);
+  }
+
+  $('appModalBackdrop').classList.add('show');
+  $('appModal').classList.add('show');
+  $('appModal').setAttribute('aria-hidden','false');
+  document.body.classList.add('modal-open');
+}
+function closeAppModal(){
+  $('appModalBackdrop').classList.remove('show');
+  $('appModal').classList.remove('show');
+  $('appModal').setAttribute('aria-hidden','true');
+  document.body.classList.remove('modal-open');
+}
+$('appModalBackdrop').onclick=closeAppModal;
+$('appModalCloseBtn')?.addEventListener('click',closeAppModal);
+
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();
+  deferredInstallPrompt=e;
+});
+window.addEventListener('appinstalled',()=>{
+  deferredInstallPrompt=null;
+  closeAppModal();
+  toast('MOA Charting 설치 완료');
+});
+
+function showInstallGuide(){
+  closeMoreSheet();
+
+  if(isStandaloneMode()){
+    openAppModal({
+      icon:'✓',
+      title:'이미 설치되어 있습니다',
+      body:'<div class="modal-center">현재 MOA Charting을 <strong>홈 화면 앱 모드</strong>로 실행 중입니다.</div>'
+    });
+    return;
+  }
+
+  const device=getDeviceType();
+
+  if(device==='ios'){
+    openAppModal({
+      icon:'iOS',
+      title:'아이폰 홈 화면에 설치',
+      body:`
+        <div class="modal-center">아이폰에서는 Safari의 <strong>홈 화면에 추가</strong> 기능을 사용합니다.</div>
+        <div class="install-steps">
+          <div class="install-step"><b>1</b><div><strong>Safari에서 현재 페이지 열기</strong><br>카카오톡·인스타 내부 브라우저라면 Safari로 열어주세요.</div></div>
+          <div class="install-step"><b>2</b><div><strong>공유 버튼 누르기</strong><br>Safari 하단 또는 상단의 공유 아이콘을 누릅니다.</div></div>
+          <div class="install-step"><b>3</b><div><strong>홈 화면에 추가</strong><br>목록에서 선택한 뒤 오른쪽 위 ‘추가’를 누릅니다.</div></div>
+        </div>`
+    });
+    return;
+  }
+
+  if(device==='android'&&deferredInstallPrompt){
+    openAppModal({
+      icon:'APP',
+      title:'MOA Charting 설치',
+      body:'<div class="modal-center">이 기기에 MOA Charting을 앱처럼 설치할 수 있습니다.</div>',
+      primaryText:'지금 설치',
+      primaryAction:async()=>{
+        const prompt=deferredInstallPrompt;
+        closeAppModal();
+        await prompt.prompt();
+        const choice=await prompt.userChoice;
+        if(choice.outcome==='accepted')toast('설치를 진행합니다');
+        deferredInstallPrompt=null;
+      }
+    });
+    return;
+  }
+
+  if(device==='android'){
+    openAppModal({
+      icon:'APP',
+      title:'안드로이드 홈 화면에 설치',
+      body:`
+        <div class="modal-center">브라우저 메뉴에서 설치할 수 있습니다.</div>
+        <div class="install-steps">
+          <div class="install-step"><b>1</b><div><strong>Chrome 또는 삼성 인터넷으로 열기</strong></div></div>
+          <div class="install-step"><b>2</b><div><strong>브라우저 메뉴 열기</strong><br>⋮ 또는 ≡ 버튼을 누릅니다.</div></div>
+          <div class="install-step"><b>3</b><div><strong>앱 설치 / 홈 화면에 추가</strong><br>표시되는 항목을 선택합니다.</div></div>
+        </div>`
+    });
+    return;
+  }
+
+  openAppModal({
+    icon:'PC',
+    title:'PC에서 사용하기',
+    body:'<div class="modal-center">현재 주소를 북마크하거나, Chrome·Edge 주소창의 <strong>설치 아이콘</strong>이 보이면 앱으로 설치할 수 있습니다.</div>'
+  });
+}
+$('installHelpBtn').onclick=showInstallGuide;
+
+const APP_VERSION=document.querySelector('meta[name="app-version"]')?.content||'0';
+if($('currentVersionLabel'))$('currentVersionLabel').textContent='v'+APP_VERSION;
+if($('updateMenuText'))$('updateMenuText').textContent='현재 버전 v'+APP_VERSION+' · 새 버전을 확인합니다.';
+
+let swRegistration=null;
+let updateAvailable=false;
+
+function showUpdateBanner(){
+  if(updateAvailable)return;
+  updateAvailable=true;
+  $('updateBanner').classList.add('show');
+}
+
+async function checkForAppUpdate(){
+  let remoteVersion=null;
+  let hasUpdate=false;
+  let error=null;
+  try{
+    const res=await fetch('./index.html?update_check='+Date.now(),{
+      cache:'no-store',
+      headers:{'Cache-Control':'no-cache'}
+    });
+    if(!res.ok)throw new Error('version fetch failed');
+    const html=await res.text();
+    const match=html.match(/<meta name="app-version" content="([^"]+)"/);
+    remoteVersion=match?.[1]||null;
+    hasUpdate=Boolean(remoteVersion&&remoteVersion!==APP_VERSION);
+    if(hasUpdate)showUpdateBanner();
+  }catch(e){
+    error=e;
+  }
+  try{await swRegistration?.update()}catch(e){}
+  return {currentVersion:APP_VERSION,remoteVersion,hasUpdate,error};
+}
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load',async()=>{
+    try{
+      swRegistration=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});
+      if(swRegistration.waiting)showUpdateBanner();
+
+      swRegistration.addEventListener('updatefound',()=>{
+        const worker=swRegistration.installing;
+        if(!worker)return;
+        worker.addEventListener('statechange',()=>{
+          if(worker.state==='installed'&&navigator.serviceWorker.controller){
+            showUpdateBanner();
+          }
+        });
+      });
+
+      navigator.serviceWorker.addEventListener('controllerchange',()=>{
+        if(sessionStorage.getItem('moa-updating')==='1'){
+          sessionStorage.removeItem('moa-updating');
+          location.reload();
+        }
+      });
+
+      setTimeout(checkForAppUpdate,2500);
+      setInterval(checkForAppUpdate,30*60*1000);
+      document.addEventListener('visibilitychange',()=>{
+        if(document.visibilityState==='visible')checkForAppUpdate();
+      });
+    }catch(e){}
+  });
+}
+
+$('updateNowBtn').onclick=async()=>{
+  const btn=$('updateNowBtn');
+  btn.disabled=true;
+  btn.textContent='업데이트 중…';
+  persistDraft();
+  sessionStorage.setItem('moa-updating','1');
+
+  try{
+    await swRegistration?.update();
+    const waiting=swRegistration?.waiting;
+    if(waiting){
+      waiting.postMessage({type:'SKIP_WAITING'});
+      return;
+    }
+  }catch(e){}
+
+  setTimeout(()=>location.reload(),700);
+};
+applyTheme();let s=state();apply(s.draft||{});if(!s.draft?.pDate)setToday();renderOpts();render();
+</script>
+</body>
+</html>
