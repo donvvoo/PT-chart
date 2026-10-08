@@ -1,6 +1,6 @@
 {
-  "name": "MOA Charting",
-  "short_name": "MOA Charting",
+  "name": "PT Charting",
+  "short_name": "PT Charting",
   "description": "SOAP 기반 차팅 생성 보조 웹앱",
   "start_url": "./index.html",
   "scope": "./",
