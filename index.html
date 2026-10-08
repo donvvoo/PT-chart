@@ -144,7 +144,7 @@ input[type=date]::-webkit-calendar-picker-indicator{
 
 
 /* =========================================================
-   MOA Charting Clean Redesign v2026.07.05
+   PT Charting Clean Redesign v2026.07.05
    기능/데이터 구조는 유지하고 시각 레이아웃만 개선
    ========================================================= */
 :root{
@@ -164,7 +164,7 @@ body{padding-bottom:128px}
 .wrap{max-width:920px;padding:20px 18px 28px}
 
 /* Header */
-.moa-header{
+.pt-header{
   position:relative;
   align-items:center;
   padding:16px 18px;
@@ -180,8 +180,8 @@ body{padding-bottom:128px}
   width:52px;height:52px;border-radius:14px;display:block;
   box-shadow:0 4px 14px rgba(0,0,0,.12)
 }
-.moa-header h1{font-size:1.42rem;letter-spacing:-.04em}
-.moa-header p{font-size:.78rem;margin-top:2px}
+.pt-header h1{font-size:1.42rem;letter-spacing:-.04em}
+.pt-header p{font-size:.78rem;margin-top:2px}
 .top-actions{align-items:center}
 .mini-btn{
   border-radius:12px;
@@ -314,7 +314,7 @@ button.big{border-radius:15px;padding:16px}
 /* Desktop: 더 넓고 정돈되지만 작성 순서는 그대로 */
 @media(min-width:761px){
   .wrap{max-width:1100px;padding:24px}
-  .moa-header{padding:16px 20px}
+  .pt-header{padding:16px 20px}
   .utility-card{
     display:grid;
     grid-template-columns:1fr;
@@ -329,7 +329,7 @@ button.big{border-radius:15px;padding:16px}
 /* Mobile: 기존처럼 위에서 아래로 즉시 선택 */
 @media(max-width:760px){
   .wrap{padding:10px 10px 22px}
-  .moa-header{
+  .pt-header{
     display:flex;
     align-items:center;
     padding:12px 13px;
@@ -337,8 +337,8 @@ button.big{border-radius:15px;padding:16px}
     margin-bottom:10px
   }
   .brand-logo{width:46px;height:46px;border-radius:12px}
-  .moa-header h1{font-size:1.2rem}
-  .moa-header p{font-size:.72rem}
+  .pt-header h1{font-size:1.2rem}
+  .pt-header p{font-size:.72rem}
   .top-actions{
     width:100%;
     margin-top:10px;
@@ -368,8 +368,8 @@ button.big{border-radius:15px;padding:16px}
 /* Very small phones */
 @media(max-width:390px){
   .brand-logo{width:42px;height:42px}
-  .moa-header h1{font-size:1.08rem}
-  .moa-header p{font-size:.68rem}
+  .pt-header h1{font-size:1.08rem}
+  .pt-header p{font-size:.68rem}
   .regions{grid-template-columns:repeat(3,1fr)}
   .region-btn{font-size:.78rem}
 }
@@ -511,7 +511,7 @@ body.sheet-open{overflow:hidden}
 
 /* mobile polish */
 @media(max-width:760px){
-  .moa-header{
+  .pt-header{
     display:block;
     padding:14px 14px 12px;
   }
@@ -733,11 +733,11 @@ body.modal-open{overflow:hidden}
 </head>
 <body>
 <div class="wrap">
-<header class="moa-header">
+<header class="pt-header">
   <div class="brand-block">
-    <img class="brand-logo" src="icon-192.png" alt="MOA Charting">
+    <img class="brand-logo" src="icon-192.png" alt="PT Charting">
     <div class="brand-copy">
-      <h1>MOA Charting</h1>
+      <h1>PT Charting</h1>
       <p>빠른 임상 기록 보조 · 선택하고 바로 차팅</p>
     </div>
   </div>
@@ -780,7 +780,7 @@ body.modal-open{overflow:hidden}
 <div class="card soap-card p-card"><div class="sec-tag"><span class="chip p">P</span>계획 <span class="section-copy"><button data-copy="P">P 복사</button></span></div><div class="phrasebar" id="phraseP"></div><label class="fld">시행 기법</label><textarea id="pTech" placeholder="예: Grade III GH joint mobilization, 15 min"></textarea><label class="fld">NRS (치료 후)</label><div class="nrs-grid" id="nrsPost"></div><label class="fld">치료 반응</label><textarea id="pResp" placeholder="예: ROM improved, pain decreased post Tx"></textarea></div>
 
 <div class="card preview-card"><div class="sec-tag"><span class="chip i">출력</span>차팅 미리보기</div><div class="preview-tools"><button class="mini-btn" id="cleanBtn">문장 정리</button><button class="mini-btn" id="copySubjectBtn">S/O/A/P 전체 복사</button></div><div class="preview-note">선택한 내용이 아래에 실시간으로 정리됩니다.</div><div class="preview-shell"><div class="preview-label">미리 생성된 차팅</div><div id="preview" class="empty">항목을 입력하면 여기에 차팅이 생성됩니다</div></div></div>
-<footer class="app-footer">MOA Charting Beta v2026.07.06-3 · © MOA BUSAN · @physio_geun_1</footer>
+<footer class="app-footer">PT Charting Beta v2026.07.06-3 · © PT BUSAN · @physio_geun_1</footer>
 </div>
 <div class="bottombar">
   <div class="inner">
@@ -788,7 +788,7 @@ body.modal-open{overflow:hidden}
     <button class="big" id="saveBtn">💾 저장</button>
     <button class="big" id="copyBtn">📋 복사</button>
   </div>
-  <div class="desktop-copyright">MOA Charting Beta v2026.07.06-3 · © MOA BUSAN · @physio_geun_1</div>
+  <div class="desktop-copyright">PT Charting Beta v2026.07.06-3 · © PT BUSAN · @physio_geun_1</div>
 </div><div class="toast" id="toast">복사 완료</div>
 
 <div class="more-backdrop" id="moreBackdrop"></div>
@@ -857,7 +857,7 @@ body.modal-open{overflow:hidden}
 
 <div class="app-modal-backdrop" id="appModalBackdrop"></div>
 <section class="app-modal" id="appModal" aria-hidden="true" role="dialog" aria-modal="true">
-  <div class="app-modal-icon" id="appModalIcon">MOA</div>
+  <div class="app-modal-icon" id="appModalIcon">PT</div>
   <h3 id="appModalTitle">안내</h3>
   <div class="app-modal-body" id="appModalBody"></div>
   <div class="app-modal-actions" id="appModalActions">
@@ -1092,7 +1092,7 @@ $('updateCheckBtn').onclick=async()=>{
     openAppModal({
       icon:'✓',
       title:'최신 버전입니다',
-      body:`<div class="modal-center">현재 MOA Charting이 최신 상태입니다.</div>
+      body:`<div class="modal-center">현재 PT Charting이 최신 상태입니다.</div>
       <div class="version-box">
         <span>현재 버전</span><strong>v${result.currentVersion}</strong>
         <span>최신 버전</span><strong>v${result.remoteVersion}</strong>
@@ -1119,7 +1119,7 @@ function getDeviceType(){
   if(/Android/i.test(ua))return 'android';
   return 'desktop';
 }
-function openAppModal({icon='MOA',title='안내',body='',primaryText='',primaryAction=null,primaryStyle='primary'}){
+function openAppModal({icon='PT',title='안내',body='',primaryText='',primaryAction=null,primaryStyle='primary'}){
   $('appModalIcon').textContent=icon;
   $('appModalTitle').textContent=title;
   $('appModalBody').innerHTML=body;
@@ -1167,7 +1167,7 @@ window.addEventListener('beforeinstallprompt',e=>{
 window.addEventListener('appinstalled',()=>{
   deferredInstallPrompt=null;
   closeAppModal();
-  toast('MOA Charting 설치 완료');
+  toast('PT Charting 설치 완료');
 });
 
 function showInstallGuide(){
@@ -1177,7 +1177,7 @@ function showInstallGuide(){
     openAppModal({
       icon:'✓',
       title:'이미 설치되어 있습니다',
-      body:'<div class="modal-center">현재 MOA Charting을 <strong>홈 화면 앱 모드</strong>로 실행 중입니다.</div>'
+      body:'<div class="modal-center">현재 PT Charting을 <strong>홈 화면 앱 모드</strong>로 실행 중입니다.</div>'
     });
     return;
   }
@@ -1202,8 +1202,8 @@ function showInstallGuide(){
   if(device==='android'&&deferredInstallPrompt){
     openAppModal({
       icon:'APP',
-      title:'MOA Charting 설치',
-      body:'<div class="modal-center">이 기기에 MOA Charting을 앱처럼 설치할 수 있습니다.</div>',
+      title:'PT Charting 설치',
+      body:'<div class="modal-center">이 기기에 PT Charting을 앱처럼 설치할 수 있습니다.</div>',
       primaryText:'지금 설치',
       primaryAction:async()=>{
         const prompt=deferredInstallPrompt;
@@ -1292,8 +1292,8 @@ if('serviceWorker' in navigator){
       });
 
       navigator.serviceWorker.addEventListener('controllerchange',()=>{
-        if(sessionStorage.getItem('moa-updating')==='1'){
-          sessionStorage.removeItem('moa-updating');
+        if(sessionStorage.getItem('pt-updating')==='1'){
+          sessionStorage.removeItem('pt-updating');
           location.reload();
         }
       });
@@ -1312,7 +1312,7 @@ $('updateNowBtn').onclick=async()=>{
   btn.disabled=true;
   btn.textContent='업데이트 중…';
   persistDraft();
-  sessionStorage.setItem('moa-updating','1');
+  sessionStorage.setItem('pt-updating','1');
 
   try{
     await swRegistration?.update();
