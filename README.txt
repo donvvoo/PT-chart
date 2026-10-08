@@ -1,5 +1,5 @@
-MOA Charting install/update popup
-버전: 2026.07.05-4
+PT-Charting install/update popup
+버전: 2026.10.08-1
 
 추가 기능
 - 홈 화면에 설치 버튼 팝업 구현
